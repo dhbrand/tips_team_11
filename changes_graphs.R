@@ -36,16 +36,16 @@ bar <- tips_full %>% ggplot(aes(categories, count)) +
   geom_bar(aes(fill = categories), stat = "identity") +  
   facet_wrap(~year) +
   scale_fill_viridis(discrete = TRUE) +
-  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank())
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank(), panel.background = element_rect(fill = "white"))
 bar
 pie <- bar + coord_polar() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank())
 pie
 bar2 <- tips_full %>% ggplot(aes(categories, count, frame = year)) + 
   geom_bar(aes(fill = categories), stat = "identity", position = "identity") +  
   scale_fill_viridis(discrete = TRUE, option = "magma") +
-  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank())
-gganimate(bar2)
-pie2 <- bar2 + coord_polar() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank())
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.x = element_blank(), legend.position = "none")
+gganimate(bar2, interval = .5)
+pie2 <- bar2 + coord_polar() + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), panel.background = element_rect(fill = "white"), panel.grid.major = element_line(colour = "grey"), plot.title = element_text(size = rel(4)))
 gganimate(pie2, interval = .5)
-gganimate(pie2, "pie2.mp4")
+gganimate(pie2, "pie2.mp4", interval = .5)
 gganimate(bar2, "bar2.mp4")
